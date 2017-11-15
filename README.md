@@ -11,20 +11,36 @@ platforms.
 Both of the below approaches require `libcrypto.so.1.0.0` usually available through
 `libssl` or similar package. The currently required version of GLIBC is 2.14.
 
+Currently [SWIG](http://www.swig.org/) is required to produce the library
+bindings, but these will be added pregenerated when the library has stabilised.
+
 ## Using libpasta-java
 
 ### Precompiled .jar
 
 Download a released jar from [Releases](https://github.com/libpasta/libpasta-java/releases).
 
-Include as usual.
+Include jar in classpath.
 
-### Steps to produce from source (requires Rust):
+### With system library installed (preferred, requires SWIG)
+
+The best way to use libpasta is to have the system libary preinstalled.
+
+* Sync submodules: `git submodule init && git submodule sync --recursive`
+* Using `pasta-bindings` submodule, produce the java libpasta_jni.so file: `cd pasta-bindings && make java && cd ..`.
+* Move the appropriate file to the maven directory: `mkdir -p src/main/resources/ && cp -r pasta-bindings/java/META-INF src/main/resources/META-INF`
+* Compile the jar: `mvn package`.
+
+The resultant jar file should be in target/libpasta-java-{version}-jar-with-dependencies.jar.
+
+### Steps to produce from source (requires Rust and SWIG):
 
  * Sync submodules: `git submodule init && git submodule sync --recursive`
- * Using `pasta-bindings` submodule, produce the java libpasta.so file: `cd pasta-bindings && make java && cd ..`.
- * Move the appropriate file to the maven directory: `mkdir -p src/main/resources/ && cp -r pasta-bindings/java/META_INF src/main/resources/META-INF`
+ * Using `pasta-bindings` submodule, produce the java libpasta_jni.so file: `cd pasta-bindings && USE_STATIC=1 make java && cd ..`.
+ * Move the appropriate file to the maven directory: `mkdir -p src/main/resources/ && cp -r pasta-bindings/java/META-INF src/main/resources/META-INF`
  * Compile the jar: `mvn package`.
+
+The resultant jar file should be in target/libpasta-java-{version}-jar-with-dependencies.jar.
 
 ### Steps to produce using precompiled library:
 
