@@ -5,6 +5,5 @@ jdk:
   - openjdk7
 # The main build
 script:
-  - wget https://github.com/libpasta/pasta-bindings/releases/download/v0.0.4-rc.1/libpasta_jni.x86_64-unknown-linux-gnu.so -O libpasta_jni.so
-  - mkdir -p src/main/resources/META-INF/lib/linux_64/ && mv libpasta_jni.so src/main/resources/META-INF/lib/linux_64/
-  - mvn package
+  # Without depending on Rust, can only try with precompiled
+  - make using-precompiled

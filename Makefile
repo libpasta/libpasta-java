@@ -6,6 +6,11 @@ SO_URL = $(shell curl -s "https://api.github.com/repos/libpasta/pasta-bindings/r
 
 all: mvn
 
+clean:
+	make -C pasta-bindings clean
+	rm -rf src/main/resources
+	mvn clean
+
 get-precompiled:
 	wget $(JAR_URL)
 
@@ -26,7 +31,8 @@ using-staticlib using-sharedlib: libpasta-sync
 	make mvn
 
 using-precompiled:
-	wget $(SO_URL) -O libpasta_jni.so
+	mkdir -p pasta-bindings/java/META-INF/lib/linux_64
+	wget $(SO_URL) -O pasta-bindings/java/META-INF/lib/linux_64/libpasta_jni.so
 	make mvn
 
 mvn:
