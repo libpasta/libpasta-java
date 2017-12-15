@@ -20,11 +20,19 @@ bindings, but these will be added pregenerated when the library has stabilised.
 
 Download a released jar from [Releases](https://github.com/libpasta/libpasta-java/releases).
 
+As a shortcut: `make get-precompiled`
+
 Include jar in classpath.
 
 ### With system library installed (preferred, requires SWIG)
 
-The best way to use libpasta is to have the system libary preinstalled.
+The best way to use libpasta is to have the system library preinstalled.
+See [here](https://github.com/libpasta/libpasta#installation) for installation
+instructions.
+
+**Run:** `make using-systemlib`
+
+Performs the following steps:
 
 * Sync submodules: `git submodule init && git submodule sync --recursive`
 * Using `pasta-bindings` submodule, produce the java libpasta_jni.so file: `cd pasta-bindings && make java && cd ..`.
@@ -33,7 +41,13 @@ The best way to use libpasta is to have the system libary preinstalled.
 
 The resultant jar file should be in target/libpasta-java-{version}-jar-with-dependencies.jar.
 
+Alteratively, run `make using-sharedlib` to build/install the sytem library as part of the installation (requires Rust).
+
 ### Steps to produce from source (requires Rust and SWIG):
+
+**Run:** `make using-staticlib`
+
+Performs the following steps:
 
  * Sync submodules: `git submodule init && git submodule sync --recursive`
  * Using `pasta-bindings` submodule, produce the java libpasta_jni.so file: `cd pasta-bindings && USE_STATIC=1 make java && cd ..`.
@@ -44,8 +58,12 @@ The resultant jar file should be in target/libpasta-java-{version}-jar-with-depe
 
 ### Steps to produce using precompiled library:
 
+**Run:** `make using-precompiled`
+
+Performs the following steps:
+
  * Get the most recent precompiled library from the pasta-bindings releases [https://github.com/libpasta/pasta-bindings/releases/]
-   - e.g. `wget https://github.com/libpasta/pasta-bindings/releases/download/v0.0.4-rc.1/libpasta_jni.x86_64-unknown-linux-gnu.so -O libpasta_jni.so`
+   - e.g. `wget https://github.com/libpasta/pasta-bindings/releases/download/v0.0.5/libpasta_jni.x86_64-unknown-linux-gnu.so -O libpasta_jni.so`
  * Move to the appropriate directory: `mkdir -p src/main/resources/META-INF/lib/linux_64/ && mv libpasta_jni.so src/main/resources/META-INF/lib/linux_64/`
  * Compile the jar: `mvn package`.
 
