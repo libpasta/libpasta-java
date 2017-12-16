@@ -15,9 +15,9 @@ get-precompiled:
 	wget $(JAR_URL)
 
 libpasta-sync:
-	git submodule update --init --recursive
+	git submodule update --init
 ifneq ($(shell git -C pasta-bindings/ rev-parse --abbrev-ref HEAD),master)
-	cd pasta-bindings && git fetch && git checkout origin/master
+	cd pasta-bindings && git fetch --all && git checkout origin/master
 endif
 	make -C pasta-bindings libpasta-sync
 
@@ -26,7 +26,7 @@ using-systemlib: libpasta-sync
 	make mvn
 
 using-staticlib: USE_STATIC=1
-using-staticlib using-sharedlib: libpasta-sync
+using-staticlib using-sharedlib:
 	USE_STATIC=$(USE_STATIC) make -C pasta-bindings libpasta java
 	make mvn
 
@@ -34,6 +34,10 @@ using-precompiled:
 	mkdir -p pasta-bindings/java/META-INF/lib/linux_64
 	wget $(SO_URL) -O pasta-bindings/java/META-INF/lib/linux_64/libpasta_jni.so
 	make mvn
+
+update-sources:
+	make -C pasta-bindings java
+	cp pasta-bindings/java/*.java src/main/java/io/github/libpasta/
 
 mvn:
 	mkdir -p src/main/resources/

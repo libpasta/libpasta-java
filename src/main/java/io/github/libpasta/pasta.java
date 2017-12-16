@@ -5,9 +5,14 @@
  * Do not make changes to this file unless you know what you are doing--modify
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
+
 package io.github.libpasta;
 
 public class pasta {
+  public static String verify_password_update_hash_fix(String hash, String password) {
+    return pastaJNI.verify_password_update_hash_fix(hash, password);
+  }
+
   public static String hash_password(String password) {
     return pastaJNI.hash_password(password);
   }
@@ -22,6 +27,14 @@ public class pasta {
 
   public static String read_password(String prompt) {
     return pastaJNI.read_password(prompt);
+  }
+
+  public static boolean verify_password_update_hash(String hash, String password) {
+    return pastaJNI.verify_password_update_hash(hash, password);
+  }
+
+  public static String migrate_hash(String hash) {
+    return pastaJNI.migrate_hash(hash);
   }
 
 }

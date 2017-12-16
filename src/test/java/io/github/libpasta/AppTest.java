@@ -36,6 +36,14 @@ public class AppTest
         // assertTrue( true );
         String hash = pasta.hash_password("hello123");
         assert pasta.verify_password(hash, "hello123");
+
+        String old_hash = "$2a$10$vI8aWBnW3fID.ZQ4/zo1G.q1lRps.9cGLcZEiGDMVr5yUP1KUOYTa";
+        String new_hash = pasta.verify_password_update_hash_fix(old_hash, "my password");
+        assert new_hash != "";
+        System.out.println("New hash: " + new_hash);        
+        assert pasta.verify_password(new_hash, "my password");
+
+
         System.out.println((char)27 + "[1;32mJava test passed." + (char)27 + "[m");
     }
 }

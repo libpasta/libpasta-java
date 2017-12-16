@@ -5,18 +5,24 @@
  * Do not make changes to this file unless you know what you are doing--modify
  * the SWIG interface file instead.
  * ----------------------------------------------------------------------------- */
+
 package io.github.libpasta;
 
 import org.scijava.nativelib.*;
 
 public class pastaJNI {
+  public final static native String verify_password_update_hash_fix(String jarg1, String jarg2);
 
   static {
     try {
-        NativeLibraryUtil.loadNativeLibrary(pastaJNI.class, "pasta_jni");
+        NativeLoader.loadLibrary("pasta_jni");
     } catch (Exception e) {
-      System.err.println("Native code library failed to load. \n" + e);
-      System.exit(1);
+      try {
+        NativeLibraryUtil.loadNativeLibrary(pastaJNI.class, "pasta_jni");
+      } catch (Exception e2) {
+        System.err.println("Native code library failed to load. \n" + e);
+        System.exit(1);
+      }
     }
   }
 
@@ -24,4 +30,6 @@ public class pastaJNI {
   public final static native boolean verify_password(String jarg1, String jarg2);
   public final static native void free_string(String jarg1);
   public final static native String read_password(String jarg1);
+  public final static native boolean verify_password_update_hash(String jarg1, String jarg2);
+  public final static native String migrate_hash(String jarg1);
 }
