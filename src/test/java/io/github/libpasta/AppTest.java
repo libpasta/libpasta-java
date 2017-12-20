@@ -38,11 +38,25 @@ public class AppTest
         assert pasta.verify_password(hash, "hello123");
 
         String old_hash = "$2a$10$vI8aWBnW3fID.ZQ4/zo1G.q1lRps.9cGLcZEiGDMVr5yUP1KUOYTa";
-        String new_hash = pasta.verify_password_update_hash_fix(old_hash, "my password");
-        assert new_hash != "";
-        System.out.println("New hash: " + new_hash);        
+        ResultHash result = pasta.verify_password_update_hash(old_hash, "my password");
+        assert result.getFirst();
+        String new_hash = result.getSecond();
+        System.out.println("New hash: " + new_hash);
         assert pasta.verify_password(new_hash, "my password");
 
+
+        Argon2i alg = new Argon2i();
+        Config cfg = Config.with_primitive(alg);
+        String migrated_hash = cfg.migrate_hash(hash);
+        assert migrated_hash.startsWith("$!$argon2i");
+
+        ResultHash res = cfg.verify_password_update_hash(migrated_hash, "not my password");
+        assert !res.getFirst();
+        res = cfg.verify_password_update_hash(migrated_hash, "hello123");
+        System.out.println("New hash: " + res.getSecond());
+        assert res.getFirst();
+        // This is not actually working correctly yet:
+        // assert res.getSecond().startsWith("$argon2i");
 
         System.out.println((char)27 + "[1;32mJava test passed." + (char)27 + "[m");
     }
