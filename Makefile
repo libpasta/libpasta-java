@@ -43,5 +43,5 @@ update-sources: libpasta-sync
 mvn:
 	mkdir -p src/main/resources/
 	cp -r pasta-bindings/java/META-INF src/main/resources/
-	mvn package
+	mvn -X package
 
