@@ -1,6 +1,6 @@
-JAR_URL = $(shell curl -s "https://api.github.com/repos/libpasta/libpasta-java/releases/latest" \
+JAR_URL = $(shell curl ${TRAVIS_GITHUB_CREDENTIALS} -s "https://api.github.com/repos/libpasta/libpasta-java/releases/latest" \
     | jq -r '.assets[] | select(.name=="libpasta-java.x86_64-unknown-linux-gnu.jar") | .browser_download_url')
-SO_URL = $(shell curl -s "https://api.github.com/repos/libpasta/pasta-bindings/releases/latest" \
+SO_URL = $(shell curl ${TRAVIS_GITHUB_CREDENTIALS} -s "https://api.github.com/repos/libpasta/pasta-bindings/releases/latest" \
     | jq -r '.assets[] | select(.name=="libpasta_jni.x86_64-unknown-linux-gnu.so") | .browser_download_url')
 
 
