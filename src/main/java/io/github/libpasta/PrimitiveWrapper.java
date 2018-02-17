@@ -21,23 +21,14 @@ public class PrimitiveWrapper {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  protected void finalize() {
-    delete();
-  }
-
   public synchronized void delete() {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        pastaJNI.delete_PrimitiveWrapper(swigCPtr);
+        throw new UnsupportedOperationException("C++ destructor does not have public access");
       }
       swigCPtr = 0;
     }
-  }
-
-  public SWIGTYPE_p_Primitive inner() {
-    long cPtr = pastaJNI.PrimitiveWrapper_inner(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_Primitive(cPtr, false);
   }
 
 }

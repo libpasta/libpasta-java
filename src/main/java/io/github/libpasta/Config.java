@@ -40,16 +40,18 @@ public class Config {
     return pastaJNI.Config_hash_password(swigCPtr, this, password);
   }
 
-  public String migrate_hash(String hash) {
-    return pastaJNI.Config_migrate_hash(swigCPtr, this, hash);
+  public HashUpdate migrate_hash(String hash) {
+    long cPtr = pastaJNI.Config_migrate_hash(swigCPtr, this, hash);
+    return (cPtr == 0) ? null : new HashUpdate(cPtr, false);
   }
 
   public boolean verify_password(String hash, String password) {
     return pastaJNI.Config_verify_password(swigCPtr, this, hash, password);
   }
 
-  public ResultHash verify_password_update_hash(String hash, String password) {
-    return new ResultHash(pastaJNI.Config_verify_password_update_hash(swigCPtr, this, hash, password), true);
+  public HashUpdate verify_password_update_hash(String hash, String password) {
+    long cPtr = pastaJNI.Config_verify_password_update_hash(swigCPtr, this, hash, password);
+    return (cPtr == 0) ? null : new HashUpdate(cPtr, false);
   }
 
 }

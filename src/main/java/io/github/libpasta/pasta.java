@@ -9,16 +9,18 @@
 package io.github.libpasta;
 
 public class pasta {
-  public static ResultHash verify_password_update_hash(String hash, String password) {
-    return new ResultHash(pastaJNI.verify_password_update_hash(hash, password), true);
+  public static HashUpdate migrate_hash(String hash) {
+    long cPtr = pastaJNI.migrate_hash(hash);
+    return (cPtr == 0) ? null : new HashUpdate(cPtr, true);
+  }
+
+  public static HashUpdate verify_password_update_hash(String hash, String password) {
+    long cPtr = pastaJNI.verify_password_update_hash(hash, password);
+    return (cPtr == 0) ? null : new HashUpdate(cPtr, true);
   }
 
   public static String hash_password(String password) {
     return pastaJNI.hash_password(password);
-  }
-
-  public static String migrate_hash(String hash) {
-    return pastaJNI.migrate_hash(hash);
   }
 
   public static String read_password(String prompt) {

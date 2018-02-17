@@ -35,7 +35,7 @@ using-precompiled:
 	wget $(SO_URL) -O pasta-bindings/java/META-INF/lib/linux_64/libpasta_jni.so
 	make mvn
 
-update-sources: libpasta-sync
+update-sources:
 	mkdir -p src/main/java/io/github/libpasta/
 	make -C pasta-bindings java
 	cp pasta-bindings/java/*.java src/main/java/io/github/libpasta/
