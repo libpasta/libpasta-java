@@ -31,6 +31,7 @@ using-staticlib using-sharedlib:
 	make mvn
 
 using-precompiled:
+	rm -rf pasta-bindings/java/META-INF/lib/linux_64
 	mkdir -p pasta-bindings/java/META-INF/lib/linux_64
 	wget $(SO_URL) -O pasta-bindings/java/META-INF/lib/linux_64/libpasta_jni.so
 	make mvn
