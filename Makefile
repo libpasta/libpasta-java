@@ -44,5 +44,5 @@ update-sources:
 mvn:
 	mkdir -p src/main/resources/
 	cp -r pasta-bindings/java/META-INF src/main/resources/
-	mvn -X package
+	mvn -X -Dorg.slf4j.simpleLogger.defaultLogLevel=debug package
 
