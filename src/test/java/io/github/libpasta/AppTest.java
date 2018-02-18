@@ -28,7 +28,7 @@ public class AppTest
         return new TestSuite( AppTest.class );
     }
 
-    public void testApi()
+    public void testApp()
     {
         String hash = pasta.hash_password("hello123");
         assert pasta.verify_password(hash, "hello123");
