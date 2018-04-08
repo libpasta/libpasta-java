@@ -21,14 +21,26 @@ public class Config {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
+  protected void finalize() {
+    delete();
+  }
+
   public synchronized void delete() {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        throw new UnsupportedOperationException("C++ destructor does not have public access");
+        pastaJNI.delete_Config(swigCPtr);
       }
       swigCPtr = 0;
     }
+  }
+
+  public Config() {
+    this(pastaJNI.new_Config__SWIG_0(), true);
+  }
+
+  public Config(PrimitiveWrapper p) {
+    this(pastaJNI.new_Config__SWIG_1(PrimitiveWrapper.getCPtr(p), p), true);
   }
 
   public static Config with_primitive(PrimitiveWrapper p) {

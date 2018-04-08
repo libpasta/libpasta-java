@@ -39,13 +39,16 @@ public class pastaJNI {
   public final static native void HashUpdate_updated_set(long jarg1, HashUpdate jarg1_, String jarg2);
   public final static native String HashUpdate_updated_get(long jarg1, HashUpdate jarg1_);
   public final static native void delete_HashUpdate(long jarg1);
+  public final static native long migrate_hash(String jarg1);
+  public final static native long verify_password_update_hash(String jarg1, String jarg2);
+  public final static native long new_Config__SWIG_0();
+  public final static native long new_Config__SWIG_1(long jarg1, PrimitiveWrapper jarg1_);
+  public final static native void delete_Config(long jarg1);
   public final static native long Config_with_primitive(long jarg1, PrimitiveWrapper jarg1_);
   public final static native String Config_hash_password(long jarg1, Config jarg1_, String jarg2);
   public final static native long Config_migrate_hash(long jarg1, Config jarg1_, String jarg2);
   public final static native boolean Config_verify_password(long jarg1, Config jarg1_, String jarg2, String jarg3);
   public final static native long Config_verify_password_update_hash(long jarg1, Config jarg1_, String jarg2, String jarg3);
-  public final static native long migrate_hash(String jarg1);
-  public final static native long verify_password_update_hash(String jarg1, String jarg2);
   public final static native String hash_password(String jarg1);
   public final static native String read_password(String jarg1);
   public final static native boolean verify_password(String jarg1, String jarg2);
